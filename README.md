@@ -71,3 +71,8 @@ can contain your configured location. Avoid posting personal configuration or to
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for tests, provider adapters and feed changes.
 Only E.ON is currently supported; other providers can be added through adapters. MIT licensed.
+
+## Support
+
+If you find this project useful, you can [buy me a coffee](https://buymeacoffee.com/balazsviszy).
+Support is optional; the project remains free and open source.

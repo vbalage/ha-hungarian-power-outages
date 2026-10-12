@@ -1,0 +1,14 @@
+{
+  "domain": "hungarian_power_outages",
+  "name": "Hungarian Power Outages",
+  "codeowners": [
+    "@vbalage"
+  ],
+  "config_flow": true,
+  "documentation": "https://github.com/vbalage/ha-hungarian-power-outages",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/vbalage/ha-hungarian-power-outages/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}

@@ -1,0 +1,153 @@
+{
+  "title": "Hungarian Power Outages",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Áramszünetek figyelése",
+        "description": "Válassza ki a tervezett áramszünetek egyeztetésének módját:\n- **Helyrajzi szám:** adja meg a települést/kerületet és egy HRSZ-t, például `0123/4`. Az utca és a házszám üresen hagyható. Az irányítószámot is hagyja üresen, ha nem szeretne további postai szűrést.\n- **Utcai cím:** használja az E.ON által megadott utcanevet és házszámot, például `14` vagy `14/A`. Emeletet, ajtót és lakásszámot ne adjon meg.\n- **Település/kerület:** az irányítószám, utca, házszám és HRSZ üresen hagyásával a teljes település jelentései láthatók.\n\nA `Budapest` név minden kerületet magában foglal. Szűkítéshez a `Budapest XVI.`, `Budapest 16` és `Budapest 16. kerület` alak is használható. A településnév a közzétett kerületi/településrészi utótagokat is magában foglalja. Ha HRSZ-t és címet is megad, a közzétett helyrajzi szám az elsődleges; a cím akkor használható, ha nincs közzétett HRSZ.\n\nA **Közeli jelentések megjelenítése** bekapcsolásával jelöljön ki helyet és sugarat a térképen (legfeljebb 100 km). A kör a címtől független, nem töltődik ki automatikusan a cím alapján. A közeli jelentések és a települési üzemzavarok nem igazolják az adott ingatlan érintettségét. A cím és a térképi kör helyben marad.",
+        "data": {
+          "provider": "Hálózati elosztó",
+          "city": "Település vagy kerület",
+          "postcode": "Irányítószám (nem kötelező)",
+          "street": "Utca (nem kötelező)",
+          "house_number": "Házszám (nem kötelező)",
+          "location": "Közeli jelentések: hely és sugár (nem kötelező)",
+          "nearby_enabled": "Közeli jelentések megjelenítése",
+          "parcel_number": "Helyrajzi szám (HRSZ, nem kötelező)"
+        },
+        "data_description": {
+          "city": "A Budapest minden kerületre keres. Szűkítéshez például Budapest XVI. vagy Budapest 16. kerület is megadható.",
+          "postcode": "Nem kötelező, négy számjegyű szűrő. HRSZ alapú keresésnél hibás postai adatok esetén hagyja üresen.",
+          "street": "Az E.ON által megadott utcanév, az utca/út megjelöléssel. HRSZ alapú kereséshez nem szükséges.",
+          "house_number": "Csak házszám, például 14/A; emelet, ajtó és lakásszám nélkül.",
+          "parcel_number": "Egy teljes HRSZ, például 0123/4 vagy 538/B. A kezdő nullákat és minden perjeles részt őrizzen meg.",
+          "nearby_enabled": "Külön közeli érzékelőket és naptárt ad hozzá. Lent válasszon helyet és sugarat.",
+          "location": "A kör középpontját helyezze az ingatlanra, és válasszon sugarat. A cím és a HRSZ egyeztetését nem módosítja."
+        }
+      },
+      "reconfigure": {
+        "title": "Figyelt cím módosítása",
+        "description": "Válassza ki a tervezett áramszünetek egyeztetésének módját:\n- **Helyrajzi szám:** adja meg a települést/kerületet és egy HRSZ-t, például `0123/4`. Az utca és a házszám üresen hagyható. Az irányítószámot is hagyja üresen, ha nem szeretne további postai szűrést.\n- **Utcai cím:** használja az E.ON által megadott utcanevet és házszámot, például `14` vagy `14/A`. Emeletet, ajtót és lakásszámot ne adjon meg.\n- **Település/kerület:** az irányítószám, utca, házszám és HRSZ üresen hagyásával a teljes település jelentései láthatók.\n\nA `Budapest` név minden kerületet magában foglal. Szűkítéshez a `Budapest XVI.`, `Budapest 16` és `Budapest 16. kerület` alak is használható. A településnév a közzétett kerületi/településrészi utótagokat is magában foglalja. Ha HRSZ-t és címet is megad, a közzétett helyrajzi szám az elsődleges; a cím akkor használható, ha nincs közzétett HRSZ.\n\nA **Közeli jelentések megjelenítése** bekapcsolásával jelöljön ki helyet és sugarat a térképen (legfeljebb 100 km). A kör a címtől független, nem töltődik ki automatikusan a cím alapján. A közeli jelentések és a települési üzemzavarok nem igazolják az adott ingatlan érintettségét. A cím és a térképi kör helyben marad.",
+        "data": {
+          "provider": "Hálózati elosztó",
+          "city": "Település vagy kerület",
+          "postcode": "Irányítószám (nem kötelező)",
+          "street": "Utca (nem kötelező)",
+          "house_number": "Házszám (nem kötelező)",
+          "location": "Közeli jelentések: hely és sugár (nem kötelező)",
+          "nearby_enabled": "Közeli jelentések megjelenítése",
+          "parcel_number": "Helyrajzi szám (HRSZ, nem kötelező)"
+        },
+        "data_description": {
+          "city": "A Budapest minden kerületre keres. Szűkítéshez például Budapest XVI. vagy Budapest 16. kerület is megadható.",
+          "postcode": "Nem kötelező, négy számjegyű szűrő. HRSZ alapú keresésnél hibás postai adatok esetén hagyja üresen.",
+          "street": "Az E.ON által megadott utcanév, az utca/út megjelöléssel. HRSZ alapú kereséshez nem szükséges.",
+          "house_number": "Csak házszám, például 14/A; emelet, ajtó és lakásszám nélkül.",
+          "parcel_number": "Egy teljes HRSZ, például 0123/4 vagy 538/B. A kezdő nullákat és minden perjeles részt őrizzen meg.",
+          "nearby_enabled": "Külön közeli érzékelőket és naptárt ad hozzá. Lent válasszon helyet és sugarat.",
+          "location": "A kör középpontját helyezze az ingatlanra, és válasszon sugarat. A cím és a HRSZ egyeztetését nem módosítja."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Nem érhető el az E.ON. Próbálja újra később.",
+      "invalid_feed": "Az E.ON adatai nem értelmezhetők. Ellenőrizze az integráció frissítéseit.",
+      "invalid_address": "Adjon meg települést; házszámhoz utcát is. Az irányítószám négy számjegy legyen. A térkép sugara 0-nál nagyobb és legfeljebb 100 km legyen. Egyetlen helyrajzi számot adjon meg, például 0123/4 vagy 538/B."
+    },
+    "abort": {
+      "already_configured": "Ez a cím már szerepel.",
+      "reconfigure_successful": "A cím frissítve."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Lekérdezés beállításai",
+        "description": "Hálózati hiba esetén 15 percenként újrapróbálkozik. A kézi frissítések között legalább egy perc telik el.",
+        "data": {
+          "poll_hours": "Lekérdezési időköz (óra)",
+          "stale_hours": "Adatok legnagyobb megengedett kora (óra)"
+        }
+      }
+    }
+  },
+  "selector": {
+    "provider": {
+      "options": {
+        "eon": "E.ON Hungary"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "planned_count": {
+        "name": "Közelgő tervezett áramszünetek"
+      },
+      "next_planned_start": {
+        "name": "Következő tervezett áramszünet kezdete"
+      },
+      "next_planned_end": {
+        "name": "Következő tervezett áramszünet vége"
+      },
+      "fault_reports": {
+        "name": "Jelzett üzemzavarok a környéken"
+      },
+      "planned_health": {
+        "name": "Tervezett áramszünet adatforrás állapota",
+        "state": {
+          "ok": "Rendben",
+          "stale": "Elavult",
+          "cannot_connect": "Kapcsolódási hiba",
+          "invalid_feed": "Hibás adatforrás",
+          "degraded": "Hiányos adatok"
+        }
+      },
+      "faults_health": {
+        "name": "Üzemzavar adatforrás állapota",
+        "state": {
+          "ok": "Rendben",
+          "stale": "Elavult",
+          "cannot_connect": "Kapcsolódási hiba",
+          "invalid_feed": "Hibás adatforrás",
+          "degraded": "Hiányos adatok"
+        }
+      },
+      "planned_last_success": {
+        "name": "Tervezett áramszünetek utolsó sikeres lekérdezése"
+      },
+      "faults_last_success": {
+        "name": "Üzemzavarok utolsó sikeres lekérdezése"
+      },
+      "planned_generated_at": {
+        "name": "Tervezett áramszünet adatok időbélyege"
+      },
+      "faults_generated_at": {
+        "name": "Üzemzavar adatok időbélyege"
+      },
+      "nearby_planned_count": {
+        "name": "Közeli tervezett áramszünetek"
+      },
+      "nearby_fault_reports": {
+        "name": "Közeli üzemzavar-jelentések"
+      }
+    },
+    "binary_sensor": {
+      "planned_now": {
+        "name": "Tervezett áramszünet időszaka most"
+      }
+    },
+    "button": {
+      "refresh": {
+        "name": "Áramszünet adatok frissítése"
+      }
+    },
+    "calendar": {
+      "planned_calendar": {
+        "name": "Tervezett áramszünetek"
+      },
+      "nearby_planned_calendar": {
+        "name": "Közeli tervezett áramszünetek"
+      }
+    }
+  }
+}

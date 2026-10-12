@@ -1,0 +1,153 @@
+{
+  "title": "Hungarian Power Outages",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Monitor power outages",
+        "description": "Choose how to match planned outages:\n- **Parcel number:** enter the town/district and one HRSZ, for example `0123/4`. Street and house number can be blank. Leave postcode blank if you do not want an extra postal filter.\n- **Street address:** use the street name listed by E.ON and a house number such as `14` or `14/A`. Omit floor, door and apartment details.\n- **Town/district:** leave postcode, street, house number and parcel number blank to see all reports for that town.\n\nEnter `Budapest` to include every district. To narrow the area, `Budapest XVI.`, `Budapest 16` and `Budapest 16. kerület` all work. Town names also include published district/locality suffixes. If both parcel and address are entered, published parcel identifiers take priority; the address is a fallback when no parcel is published.\n\nEnable **Include nearby reports** and select a map point and radius to see additional geographic candidates (maximum 100 km). This circle is independent of the address and is not filled automatically from it. Nearby reports and town-level faults do not confirm your property is affected. Your address and map circle stay local.",
+        "data": {
+          "provider": "Network operator",
+          "city": "Town or district",
+          "postcode": "Postcode (optional)",
+          "street": "Street (optional)",
+          "house_number": "House number (optional)",
+          "location": "Nearby reports: location and radius (optional)",
+          "nearby_enabled": "Include nearby reports",
+          "parcel_number": "Parcel number (HRSZ, optional)"
+        },
+        "data_description": {
+          "city": "Budapest includes every district. Optionally narrow it with Budapest XVI. or Budapest 16. kerület. Accents and punctuation are ignored.",
+          "postcode": "Optional four-digit filter. Leave blank for parcel-only matching if postal data is inconsistent.",
+          "street": "E.ON street name, including utca/út. Leave blank for parcel-only matching.",
+          "house_number": "House number only, for example 14/A; no floor, door or apartment.",
+          "parcel_number": "One exact HRSZ, for example 0123/4 or 538/B. Keep leading zeros and all slash components.",
+          "nearby_enabled": "Adds separate nearby sensors and a calendar. Choose a point and radius below.",
+          "location": "Centre the circle on the property and choose your radius. This does not change address or parcel matching."
+        }
+      },
+      "reconfigure": {
+        "title": "Change monitored address",
+        "description": "Choose how to match planned outages:\n- **Parcel number:** enter the town/district and one HRSZ, for example `0123/4`. Street and house number can be blank. Leave postcode blank if you do not want an extra postal filter.\n- **Street address:** use the street name listed by E.ON and a house number such as `14` or `14/A`. Omit floor, door and apartment details.\n- **Town/district:** leave postcode, street, house number and parcel number blank to see all reports for that town.\n\nEnter `Budapest` to include every district. To narrow the area, `Budapest XVI.`, `Budapest 16` and `Budapest 16. kerület` all work. Town names also include published district/locality suffixes. If both parcel and address are entered, published parcel identifiers take priority; the address is a fallback when no parcel is published.\n\nEnable **Include nearby reports** and select a map point and radius to see additional geographic candidates (maximum 100 km). This circle is independent of the address and is not filled automatically from it. Nearby reports and town-level faults do not confirm your property is affected. Your address and map circle stay local.",
+        "data": {
+          "provider": "Network operator",
+          "city": "Town or district",
+          "postcode": "Postcode (optional)",
+          "street": "Street (optional)",
+          "house_number": "House number (optional)",
+          "location": "Nearby reports: location and radius (optional)",
+          "nearby_enabled": "Include nearby reports",
+          "parcel_number": "Parcel number (HRSZ, optional)"
+        },
+        "data_description": {
+          "city": "Budapest includes every district. Optionally narrow it with Budapest XVI. or Budapest 16. kerület. Accents and punctuation are ignored.",
+          "postcode": "Optional four-digit filter. Leave blank for parcel-only matching if postal data is inconsistent.",
+          "street": "E.ON street name, including utca/út. Leave blank for parcel-only matching.",
+          "house_number": "House number only, for example 14/A; no floor, door or apartment.",
+          "parcel_number": "One exact HRSZ, for example 0123/4 or 538/B. Keep leading zeros and all slash components.",
+          "nearby_enabled": "Adds separate nearby sensors and a calendar. Choose a point and radius below.",
+          "location": "Centre the circle on the property and choose your radius. This does not change address or parcel matching."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot reach E.ON. Try again later.",
+      "invalid_feed": "E.ON returned an unsupported feed. Check for integration updates.",
+      "invalid_address": "Enter a town; house numbers require a street. Postcodes must have four digits. Map radius must be greater than zero and at most 100 km. Enter one parcel number, for example 0123/4 or 538/B."
+    },
+    "abort": {
+      "already_configured": "This address is already configured.",
+      "reconfigure_successful": "The monitored address was updated."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Update settings",
+        "description": "Failed feeds retry every 15 minutes. Manual refreshes share a one-minute cooldown.",
+        "data": {
+          "poll_hours": "Polling interval (hours)",
+          "stale_hours": "Maximum feed age (hours)"
+        }
+      }
+    }
+  },
+  "selector": {
+    "provider": {
+      "options": {
+        "eon": "E.ON Hungary"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "planned_count": {
+        "name": "Upcoming planned outages"
+      },
+      "next_planned_start": {
+        "name": "Next planned outage start"
+      },
+      "next_planned_end": {
+        "name": "Next planned outage end"
+      },
+      "fault_reports": {
+        "name": "Reported faults in area"
+      },
+      "planned_health": {
+        "name": "Planned outage feed health",
+        "state": {
+          "ok": "OK",
+          "stale": "Stale",
+          "cannot_connect": "Connection failed",
+          "invalid_feed": "Invalid feed",
+          "degraded": "Incomplete records"
+        }
+      },
+      "faults_health": {
+        "name": "Fault feed health",
+        "state": {
+          "ok": "OK",
+          "stale": "Stale",
+          "cannot_connect": "Connection failed",
+          "invalid_feed": "Invalid feed",
+          "degraded": "Incomplete records"
+        }
+      },
+      "planned_last_success": {
+        "name": "Planned outages last successful check"
+      },
+      "faults_last_success": {
+        "name": "Faults last successful check"
+      },
+      "planned_generated_at": {
+        "name": "Planned outage feed timestamp"
+      },
+      "faults_generated_at": {
+        "name": "Fault feed timestamp"
+      },
+      "nearby_planned_count": {
+        "name": "Nearby planned outages"
+      },
+      "nearby_fault_reports": {
+        "name": "Nearby fault reports"
+      }
+    },
+    "binary_sensor": {
+      "planned_now": {
+        "name": "Planned outage interval now"
+      }
+    },
+    "button": {
+      "refresh": {
+        "name": "Refresh outages"
+      }
+    },
+    "calendar": {
+      "planned_calendar": {
+        "name": "Planned outages"
+      },
+      "nearby_planned_calendar": {
+        "name": "Nearby planned outages"
+      }
+    }
+  }
+}

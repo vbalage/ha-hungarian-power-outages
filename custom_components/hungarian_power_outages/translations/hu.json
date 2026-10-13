@@ -52,7 +52,8 @@
     "error": {
       "cannot_connect": "Nem érhető el az E.ON. Próbálja újra később.",
       "invalid_feed": "Az E.ON adatai nem értelmezhetők. Ellenőrizze az integráció frissítéseit.",
-      "invalid_address": "Adjon meg települést; házszámhoz utcát is. Az irányítószám négy számjegy legyen. A térkép sugara 0-nál nagyobb és legfeljebb 100 km legyen. Egyetlen helyrajzi számot adjon meg, például 0123/4 vagy 538/B."
+      "invalid_address": "Adjon meg települést; házszámhoz utcát is. Az irányítószám négy számjegy legyen. A térkép sugara 0-nál nagyobb és legfeljebb 100 km legyen. Egyetlen helyrajzi számot adjon meg, például 0123/4 vagy 538/B.",
+      "feed_too_large": "Az E.ON adatforrása túllépte a letöltési méretkorlátot. Ellenőrizze az integráció frissítéseit."
     },
     "abort": {
       "already_configured": "Ez a cím már szerepel.",
@@ -99,7 +100,8 @@
           "stale": "Elavult",
           "cannot_connect": "Kapcsolódási hiba",
           "invalid_feed": "Hibás adatforrás",
-          "degraded": "Hiányos adatok"
+          "degraded": "Hiányos adatok",
+          "feed_too_large": "Az adatforrás túl nagy"
         }
       },
       "faults_health": {
@@ -109,7 +111,8 @@
           "stale": "Elavult",
           "cannot_connect": "Kapcsolódási hiba",
           "invalid_feed": "Hibás adatforrás",
-          "degraded": "Hiányos adatok"
+          "degraded": "Hiányos adatok",
+          "feed_too_large": "Az adatforrás túl nagy"
         }
       },
       "planned_last_success": {

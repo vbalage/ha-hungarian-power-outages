@@ -151,3 +151,41 @@ def test_known_source_anomalies_are_explicit(anomaly):
     else:
         assert not feed.items and feed.skipped_records == 1
         assert bool(feed.incomplete_addresses) == (anomaly != "empty_addresses")
+
+
+async def test_valid_feed_larger_than_old_limit(aioclient_mock, hass):
+    """A growing national feed must not be mistaken for malformed data."""
+    import json
+
+    from homeassistant.helpers.aiohttp_client import async_get_clientsession
+
+    from custom_components.hungarian_power_outages.models import Address, match_outage
+
+    raw = json.dumps(PLANNED).encode() + b" " * (10 * 1024 * 1024)
+    aioclient_mock.get(PLANNED_URL, content=raw)
+    aioclient_mock.get(FAULTS_URL, json=FAULTS)
+    with patch(
+        "custom_components.hungarian_power_outages.providers.eon.datetime", wraps=datetime
+    ) as clock:
+        clock.now.return_value = NOW
+        snapshot = await EonClient(async_get_clientsession(hass)).async_fetch()
+    assert snapshot.planned.error is None
+    assert snapshot.planned.usable(NOW, 48)
+    assert len(snapshot.planned.items) == 1
+    assert not any(match_outage(Address("Pákozd"), item) for item in snapshot.planned.items)
+
+
+async def test_oversized_feed_preserves_previous_data(aioclient_mock, hass):
+    """Enforce the actual byte limit and retain the last successful snapshot."""
+    from homeassistant.helpers.aiohttp_client import async_get_clientsession
+
+    aioclient_mock.get(PLANNED_URL, content=b" " * 257, headers={"Content-Length": "1"})
+    previous = parse_feed(PLANNED, "planned", NOW)
+    with patch("custom_components.hungarian_power_outages.providers.eon.MAX_BYTES", 256):
+        feed = await EonClient(async_get_clientsession(hass))._fetch(
+            "planned", PLANNED_URL, previous
+        )
+    assert feed.error == "feed_too_large"
+    assert feed.items == previous.items
+    assert feed.fetched_at == previous.fetched_at
+    assert not feed.usable(NOW, 48)

@@ -52,7 +52,8 @@
     "error": {
       "cannot_connect": "Cannot reach E.ON. Try again later.",
       "invalid_feed": "E.ON returned an unsupported feed. Check for integration updates.",
-      "invalid_address": "Enter a town; house numbers require a street. Postcodes must have four digits. Map radius must be greater than zero and at most 100 km. Enter one parcel number, for example 0123/4 or 538/B."
+      "invalid_address": "Enter a town; house numbers require a street. Postcodes must have four digits. Map radius must be greater than zero and at most 100 km. Enter one parcel number, for example 0123/4 or 538/B.",
+      "feed_too_large": "The E.ON feed exceeded the download size limit. Check for integration updates."
     },
     "abort": {
       "already_configured": "This address is already configured.",
@@ -99,7 +100,8 @@
           "stale": "Stale",
           "cannot_connect": "Connection failed",
           "invalid_feed": "Invalid feed",
-          "degraded": "Incomplete records"
+          "degraded": "Incomplete records",
+          "feed_too_large": "Feed exceeds size limit"
         }
       },
       "faults_health": {
@@ -109,7 +111,8 @@
           "stale": "Stale",
           "cannot_connect": "Connection failed",
           "invalid_feed": "Invalid feed",
-          "degraded": "Incomplete records"
+          "degraded": "Incomplete records",
+          "feed_too_large": "Feed exceeds size limit"
         }
       },
       "planned_last_success": {

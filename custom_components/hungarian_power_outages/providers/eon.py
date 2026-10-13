@@ -17,11 +17,16 @@ BASE_URL = "https://www.eon.hu/content/dam/eon/eon-hungary/external-app-data/out
 PLANNED_URL = BASE_URL + "poweroutage.json"
 FAULTS_URL = BASE_URL + "unexpectedoutage.json"
 BUDAPEST = ZoneInfo("Europe/Budapest")
-MAX_BYTES = 10 * 1024 * 1024
+# Bound decompressed downloads with headroom for the growing nationwide feed.
+MAX_BYTES = 64 * 1024 * 1024
 
 
 class FeedError(ValueError):
     """Feed changed or contains invalid data; never treat this as an empty feed."""
+
+
+class FeedTooLarge(FeedError):
+    """The decompressed response exceeded the download safety limit."""
 
 
 def timestamp(value: dict) -> datetime:
@@ -185,10 +190,12 @@ class EonClient:
                 async for chunk in response.content.iter_chunked(65536):
                     raw.extend(chunk)
                     if len(raw) > MAX_BYTES:
-                        raise FeedError("Feed too large")
+                        raise FeedTooLarge("Feed too large")
             return await asyncio.to_thread(parse_response, raw, kind, datetime.now(UTC))
         except ClientError, TimeoutError:
             return replace(previous, error="cannot_connect")
+        except FeedTooLarge:
+            return replace(previous, error="feed_too_large")
         except FeedError, ValueError, UnicodeError:
             return replace(previous, error="invalid_feed")
 

@@ -135,11 +135,10 @@ class OutageConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         snapshot = await client.async_fetch()
         # Permit setup if either feed works. Health entities explain partial failures.
         if snapshot.planned.error and snapshot.faults.error:
-            return (
-                "invalid_feed"
-                if "invalid_feed" in (snapshot.planned.error, snapshot.faults.error)
-                else "cannot_connect"
-            )
+            errors = (snapshot.planned.error, snapshot.faults.error)
+            if "feed_too_large" in errors:
+                return "feed_too_large"
+            return "invalid_feed" if "invalid_feed" in errors else "cannot_connect"
         return None
 
     async def async_step_user(self, user_input=None):

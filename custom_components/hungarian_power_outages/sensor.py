@@ -111,7 +111,14 @@ class FeedSensor(OutageEntity, SensorEntity):
         self.kind, self.field = kind, field
         if field == "health":
             self._attr_device_class = SensorDeviceClass.ENUM
-            self._attr_options = ["ok", "stale", "cannot_connect", "invalid_feed", "degraded"]
+            self._attr_options = [
+                "ok",
+                "stale",
+                "cannot_connect",
+                "invalid_feed",
+                "feed_too_large",
+                "degraded",
+            ]
         else:
             self._attr_device_class = SensorDeviceClass.TIMESTAMP
 

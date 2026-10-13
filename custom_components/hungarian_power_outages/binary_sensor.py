@@ -17,18 +17,14 @@ class PlannedNowSensor(OutageEntity, BinarySensorEntity):
 
     @property
     def is_on(self) -> bool:
-        return any(
-            item.start <= self.coordinator.now < item.end
-            for item, _ in self.coordinator.matched_planned()
-        )
+        return bool(self.coordinator.active_planned())
 
     @property
     def extra_state_attributes(self):
         return {
             "matches": [
                 {"id": item.id, "match": str(level)}
-                for item, level in self.coordinator.matched_planned()
-                if item.start <= self.coordinator.now < item.end
+                for item, level in self.coordinator.active_planned()
             ],
             "meaning": "scheduled_interval_matches_location; electricity_supply_not_measured",
         }

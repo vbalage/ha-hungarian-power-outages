@@ -162,6 +162,11 @@ def parse_feed(payload: dict, kind: str, fetched_at: datetime) -> Feed:
     )
 
 
+def parse_response(raw: bytearray, kind: str, fetched_at: datetime) -> Feed:
+    """Decode and normalize a downloaded feed off the event loop."""
+    return parse_feed(json.loads(raw), kind, fetched_at)
+
+
 class EonClient:
     """Shared asynchronous client with a one-minute request cooldown."""
 
@@ -181,8 +186,7 @@ class EonClient:
                     raw.extend(chunk)
                     if len(raw) > MAX_BYTES:
                         raise FeedError("Feed too large")
-                payload = json.loads(raw)
-            return parse_feed(payload, kind, datetime.now(UTC))
+            return await asyncio.to_thread(parse_response, raw, kind, datetime.now(UTC))
         except ClientError, TimeoutError:
             return replace(previous, error="cannot_connect")
         except FeedError, ValueError, UnicodeError:

@@ -187,7 +187,7 @@ class NearbySensor(OutageEntity, SensorEntity):
                 "latitude": self.coordinator.search_area.center.latitude,
                 "longitude": self.coordinator.search_area.center.longitude,
             },
-            "source_records_without_coordinates": sum(
-                item.coordinates is None for item in self.coordinator.feed(self.kind).items
+            "source_records_without_coordinates": self.coordinator.records_without_coordinates(
+                self.kind
             ),
         }
